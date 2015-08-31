@@ -43,11 +43,18 @@ public class MainActivity extends AppCompatActivity {
                 UserModel userModel = new UserModel();
                 jsonObject.has("$distint_id");
                 JSONObject jsonObjectProperties = jsonObject.getJSONObject("$properties");
-                userModel.setEmail(jsonObjectProperties.getString("$email"));
-                userModel.setPhone(jsonObjectProperties.getString("$phone"));
-                userModel.setName(jsonObjectProperties.getString("$name"));
-                System.out.println("name : " + jsonObjectProperties.getString("$name"));
-                userModel.setLocation(jsonObjectProperties.getString("$location"));
+                if (jsonObjectProperties.has("$email")) {
+                    userModel.setEmail(jsonObjectProperties.getString("$email"));
+                }
+                if (jsonObjectProperties.has("$phone")) {
+                    userModel.setPhone(jsonObjectProperties.getString("$phone"));
+                }
+                if (jsonObjectProperties.has("$name")) {
+                    userModel.setName(jsonObjectProperties.getString("$name"));
+                }
+                if (jsonObjectProperties.has("$location")) {
+                    userModel.setLocation(jsonObjectProperties.getString("$location"));
+                }
 
                 userModels.add(userModel);
             }
