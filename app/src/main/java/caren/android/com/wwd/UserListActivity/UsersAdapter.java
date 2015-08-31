@@ -19,7 +19,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public UsersAdapter() {}
 
     public void addAll(List<UserModel> userModels) {
-        userModels.addAll(userModels);
+        this.userModels.addAll(userModels);
     }
 
     public UsersAdapter(List<UserModel> users) {

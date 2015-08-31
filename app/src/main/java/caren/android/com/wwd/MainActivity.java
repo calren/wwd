@@ -24,14 +24,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initializeRecyclerView();
         new MixpanelApi().execute(this);
-
-
     }
 
     private void initializeRecyclerView() {
         System.out.println("initialize recycler view called");
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvUsers);
-        UsersAdapter adapter = new UsersAdapter();
         new MixpanelApi().execute(this);
         rvContacts.setAdapter(adapter);
         rvContacts.setLayoutManager(new LinearLayoutManager(this));
@@ -49,14 +46,19 @@ public class MainActivity extends AppCompatActivity {
                 userModel.setEmail(jsonObjectProperties.getString("$email"));
                 userModel.setPhone(jsonObjectProperties.getString("$phone"));
                 userModel.setName(jsonObjectProperties.getString("$name"));
+                System.out.println("name : " + jsonObjectProperties.getString("$name"));
                 userModel.setLocation(jsonObjectProperties.getString("$location"));
 
                 userModels.add(userModel);
             }
+
+            System.out.println("user models size: "+ userModels.size());
+            adapter.addAll(userModels);
+            System.out.println("adapter size: " + adapter.getItemCount());
+            adapter.notifyDataSetChanged();
         } catch (Exception e) {
             System.out.println("exception: " + e);
         }
 
-        adapter.addAll(userModels);
     }
 }
