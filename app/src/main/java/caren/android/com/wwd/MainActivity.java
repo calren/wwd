@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 UserModel userModel = new UserModel();
-                jsonObject.has("$distint_id");
+                if (jsonObject.has("$distint_id")) {
+                    userModel.setDistinctId(jsonObject.getString("$distint_id"));
+                }
                 JSONObject jsonObjectProperties = jsonObject.getJSONObject("$properties");
                 if (jsonObjectProperties.has("$email")) {
                     userModel.setEmail(jsonObjectProperties.getString("$email"));
