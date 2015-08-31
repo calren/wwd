@@ -10,7 +10,26 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MixpanelApi {
+import android.app.Activity;
+import android.os.AsyncTask;
+
+import caren.android.com.wwd.MainActivity;
+
+public class MixpanelApi extends AsyncTask<Activity, Void, JSONArray> {
+
+    static JSONArray records;
+    Activity activity;
+
+    @Override
+    public JSONArray doInBackground(Activity... activities) {
+        activity = activities[0];
+        try {
+            return fetchEngageResults();
+        } catch (Exception e) {
+            System.out.println("error fetching results: " + e);
+            return null;
+        }
+    }
 
     public static JSONArray fetchEngageResults() throws Exception {
         String API_KEY = "c57626aaf38fd600d92f06c89a1fef52";
@@ -54,9 +73,9 @@ public class MixpanelApi {
         stream.close();
 
         // parse response
-        JSONArray records;
         try {
             JSONObject responseJson = new JSONObject(result);
+            System.out.println("responseJson: " + responseJson);
             if (responseJson.has("error")) {
                 throw new Exception(responseJson.toString());
             } else {
@@ -65,6 +84,13 @@ public class MixpanelApi {
         } catch (Exception e) {
             throw new Exception("Cannot parse response to JSON - response: " + result);
         }
+        System.out.println("records: " + records);
         return records;
+    }
+
+    @Override
+    public void onPostExecute(JSONArray jsonArray) {
+        System.out.println("on post execute called");
+        ((MainActivity) activity).populateUserList(records);
     }
 }

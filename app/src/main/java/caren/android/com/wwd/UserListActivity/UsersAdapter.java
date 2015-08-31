@@ -1,5 +1,6 @@
 package caren.android.com.wwd.UserListActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -13,7 +14,13 @@ import caren.android.com.wwd.R;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
-    private List<UserModel> userModels;
+    private List<UserModel> userModels = new ArrayList<>();
+
+    public UsersAdapter() {}
+
+    public void addAll(List<UserModel> userModels) {
+        userModels.addAll(userModels);
+    }
 
     public UsersAdapter(List<UserModel> users) {
         userModels = users;
@@ -60,6 +67,4 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             phoneTextView = (TextView) itemView.findViewById(R.id.user_phone);
         }
     }
-
-
 }
