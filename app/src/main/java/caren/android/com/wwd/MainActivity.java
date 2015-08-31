@@ -46,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 if (jsonObjectProperties.has("$email")) {
                     userModel.setEmail(jsonObjectProperties.getString("$email"));
                 }
-                if (jsonObjectProperties.has("$phone")) {
-                    userModel.setPhone(jsonObjectProperties.getString("$phone"));
+                if (jsonObjectProperties.has("phone")) {
+                    userModel.setPhone(jsonObjectProperties.getString("phone"));
                 }
                 if (jsonObjectProperties.has("$name")) {
                     userModel.setName(jsonObjectProperties.getString("$name"));
                 }
-                if (jsonObjectProperties.has("$location")) {
-                    userModel.setLocation(jsonObjectProperties.getString("$location"));
+                if (jsonObjectProperties.has("$city") && jsonObjectProperties.has("$country_code")) {
+                    userModel.setLocation(jsonObjectProperties.getString("$city") + ", " + jsonObjectProperties.getString("$country_code"));
                 }
 
                 userModels.add(userModel);
