@@ -16,7 +16,11 @@ public class UserModel {
     }
 
     public String getLocation() {
-        return location;
+        if (location != null) {
+            return location;
+        } else {
+            return "N / A";
+        }
     }
 
     public void setLocation(String location) {
@@ -24,7 +28,11 @@ public class UserModel {
     }
 
     public String getEmail() {
-        return email;
+        if (email != null) {
+            return email;
+        } else {
+            return "N / A";
+        }
     }
 
     public void setEmail(String email) {
@@ -32,7 +40,11 @@ public class UserModel {
     }
 
     public String getPhone() {
-        return phone;
+        if (phone != null) {
+            return phone;
+        } else {
+            return "N / A";
+        }
     }
 
     public void setPhone(String phone) {
